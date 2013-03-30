@@ -1,0 +1,5 @@
+form method="post" action="/photos" enctype="multipart/form-data"
+  input name="authenticity_token" value=session[:csrf] type="hidden"
+  input type="file" name="photo"
+  input type="submit" value="Add the photo"
+

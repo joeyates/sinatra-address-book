@@ -91,6 +91,28 @@ class AddressBook < Sinatra::Base
   post '/username' do
     "Your new username is '#{params[:username]}'"
   end
+
+  ########################################
+  # POST: Uploading files
+
+  # A form for file upload
+  get '/photos' do
+    slim :photo_upload
+  end
+
+  # Save an uploaded file
+  # Note - this doesn't work on Heroku
+  post '/photos' do
+    if params[:photo].nil?
+      redirect '/photos'
+      return
+    end
+    filename = File.join(settings.root, 'files', params[:photo][:filename])
+    File.open(filename, 'w') do |file|
+      file.write params[:photo][:tempfile].read
+    end
+    "OK, photo saved"
+  end
 end
 
 __END__
