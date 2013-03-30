@@ -37,6 +37,49 @@ class AddressBook < Sinatra::Base
   end
 
   ########################################
+  # Handlers, routes and parameters
+
+  # A page with a collection of route examples
+  get '/route_examples' do
+    slim :route_examples
+  end
+
+  # Search parameters
+  get '/search' do
+    slim :show_params, locals: {comment: "You asked for '#{params[:q]}'"}
+  end
+
+  # Named parameters - using the 'params' variable
+  get '/things/:id' do
+    comment = "You asked for thing number '#{params[:id]}'"
+    slim :show_params, locals: {comment: comment}
+  end
+
+  # Named parameters - using block params
+  get '/objects/:id' do |id|
+    comment = "You asked for object number '#{id}'"
+    slim :show_params, locals: {comment: comment}
+  end
+
+  # Splats
+  get '/the/*/of/*' do
+    comment = "You asked for 'the #{params[:splat][0]} of #{params[:splat][1]}'"
+    slim :show_params, locals: {comment: comment}
+  end
+
+  # Optional parameters - format defaults to 'html'
+  get '/conditions.?:format?' do |format = 'html'|
+    comment = "format: #{format}"
+    slim :show_params, locals: {comment: comment}
+  end
+
+  # Regular expressions in routes
+  get %r{/words/([a-z]+)} do
+    comment = "word: #{params[:captures][0]}"
+    slim :show_params, locals: {comment: comment}
+  end
+
+  ########################################
   # POST: Protecting from CSRF attacks
 
   # A form with CSRF protection
@@ -54,4 +97,12 @@ __END__
 
 @@my_inline_template
 h1 This is an inline template
+
+@@show_params
+p = comment
+p
+  | params:
+  = params.inspect
+p
+  a href="/route_examples" Back
 

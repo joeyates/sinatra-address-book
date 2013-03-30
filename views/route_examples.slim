@@ -1,0 +1,28 @@
+p
+  | A route with a search parameter: 
+  a href="/search?q=books" Search for books
+
+p
+  | A route with a named parameter (using params): 
+  a href="/things/42" Get me thing number 42
+
+p
+  | A route with a named parameter (using block params): 
+  a href="/objects/42" Get me object number 42
+
+p
+  | A route with splats: 
+  a href="/the/third/of/may" Get me a date
+
+p
+  | Route with optional format parameter: 
+  a href="/conditions.odt" I want an ODT document
+
+p
+  | Route without optional format parameter: 
+  a href="/conditions" I want the default format
+
+p
+  | Route with regular expression: 
+  a href="/words/tree" I want 'tree'
+
