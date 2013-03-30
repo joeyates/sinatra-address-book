@@ -151,6 +151,14 @@ class AddressBook < Sinatra::Base
   get '/provides' do
     'This is the default handler'
   end
+
+  ########################################
+  # The addresses application
+
+  get '/addresses' do
+    @addresses = Address.all
+    slim :'addresses/index', locals: {addresses: @addresses}
+  end
 end
 
 __END__
