@@ -18,3 +18,18 @@ Run the server:
 bundle exex rackup -p 8080
 ```
 
+Heroku
+======
+
+Database setup:
+
+```shell
+heroku addons:add heroku-postgresql:dev
+```
+
+Note the name of the environment variable, e.g. HEROKU_POSTGRESQL_ROSE_URL
+
+```shell
+heroku pg:promote HEROKU_POSTGRESQL_COLOR_URL
+```
+
