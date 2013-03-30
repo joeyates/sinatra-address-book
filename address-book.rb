@@ -1,11 +1,31 @@
 require 'sinatra/base'
 require 'slim'
+require 'data_mapper'
 
 Slim::Engine.default_options[:pretty] = true
+
+class Address
+  include DataMapper::Resource
+  property :id,     Serial
+  property :name,   String
+  property :street, Text
+end
 
 class AddressBook < Sinatra::Base
   configure do
     enable :inline_templates
+  end
+
+  configure :development do
+    # This code is run at startup when settings.environment is :development
+    DataMapper.setup(:default, "sqlite3://#{settings.root}/development.sqlite3")
+    DataMapper.auto_upgrade!
+  end
+
+  configure :production do
+    # Run in production environment
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
+    DataMapper.auto_upgrade!
   end
 
   # Always create a CSRF token
