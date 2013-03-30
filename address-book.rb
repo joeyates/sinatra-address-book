@@ -13,7 +13,10 @@ class AddressBook < Sinatra::Base
     session[:csrf] ||= Rack::Protection::Base.new(self).random_string
   end
 
-  # The home page
+  ########################################
+  # Simple responses and templates
+
+  # The home page - uses a Slim template
   get '/' do
     slim :home
   end
