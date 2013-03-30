@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'slim'
 gem 'data_mapper'
-gem 'dm-sqlite-adapter'
 
 group :development do
   gem 'unicorn'
@@ -17,5 +16,13 @@ end
 group :test do
   gem 'rack-test'
   gem 'rspec'
+end
+
+group :development, :test do
+  gem 'dm-sqlite-adapter'
+end
+
+group :production do
+  gem 'dm-postgres-adapter'
 end
 
