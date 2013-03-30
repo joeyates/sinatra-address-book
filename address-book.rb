@@ -14,6 +14,7 @@ end
 class AddressBook < Sinatra::Base
   configure do
     enable :inline_templates
+    enable :method_override
   end
 
   configure :development do
@@ -156,8 +157,29 @@ class AddressBook < Sinatra::Base
   # The addresses application
 
   get '/addresses' do
-    @addresses = Address.all
-    slim :'addresses/index', locals: {addresses: @addresses}
+    addresses = Address.all
+    slim :'addresses/index', locals: {addresses: addresses}
+  end
+
+  post '/addresses' do
+    address = Address.new(params[:address])
+
+    if address.save
+      redirect '/addresses'
+    else
+      redirect '/addresses/new'
+    end
+  end
+
+  get '/addresses/new' do
+    address = Address.new
+    slim :'addresses/new', locals: {address: address}
+  end
+
+  delete '/addresses/:id' do |id|
+    address = Address.get!(id)
+    address.destroy!
+    redirect '/addresses'
   end
 end
 

@@ -1,0 +1,9 @@
+form  method="post" action="/addresses"
+  input name="authenticity_token" value=session[:csrf] type="hidden"
+  p
+    input type="text" name="address[name]"
+  p
+    input type="text" name="address[street]"
+  p
+    input type="submit" value="Create"
+

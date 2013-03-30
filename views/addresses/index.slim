@@ -1,8 +1,17 @@
 h1 Addresses
 
-table
+p
+  a.btn.btn-primary href="/addresses/new" Add
+
+table.table.table-striped
   - for address in addresses do
     tr
       td = address.name
       td = address.street
+      td
+        form method="post" action="/addresses/#{address.id}"
+          div
+            input name="authenticity_token" value=session[:csrf] type="hidden"
+            input name="_method" type="hidden" value="delete"
+          button.btn.btn-danger Delete
 
