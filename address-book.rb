@@ -113,6 +113,24 @@ class AddressBook < Sinatra::Base
     end
     "OK, photo saved"
   end
+
+  ########################################
+  # Route conditions
+
+  # provides
+
+  # Specify that we want a JSON response
+  # use curl to test this:
+  #   curl -H 'Accept: application/json' http://0.0.0.0:3000/provides
+  get '/provides', provides: :json do
+    '{result: "You asked for JSON"}'
+  end
+
+  # Don't specify the response type
+  #   curl http://0.0.0.0:3000/provides
+  get '/provides' do
+    'This is the default handler'
+  end
 end
 
 __END__
