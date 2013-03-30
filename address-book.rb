@@ -6,6 +6,7 @@ class AddressBook < Sinatra::Base
     enable :inline_templates
   end
 
+  # The home page
   get '/' do
     slim :home
   end
