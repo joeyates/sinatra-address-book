@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require 'slim'
 
+Slim::Engine.default_options[:pretty] = true
+
 class AddressBook < Sinatra::Base
   configure do
     enable :inline_templates
