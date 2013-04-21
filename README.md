@@ -15,7 +15,7 @@ Develop
 
 Run the server:
 ```shell
-bundle exex rackup -p 8080
+bundle exec rackup -p 8080
 ```
 
 Heroku
