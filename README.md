@@ -7,7 +7,7 @@ Installation
 
 Install Ruby gems:
 ```shell
-bundle install –path=./vendor/bundle
+bundle install --path=./vendor/bundle
 ```
 
 Develop
